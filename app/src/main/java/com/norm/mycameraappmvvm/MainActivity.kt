@@ -17,13 +17,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (arePermissionGranted()) {
+        if (!arePermissionGranted()) {
             ActivityCompat.requestPermissions(
-                this, CAMERA_PERMISSION, 100
+                this, CAMERA_PERMISSIONS, 0
             )
         }
+
+        super.onCreate(savedInstanceState)
+
 
         setContent {
             MyCameraAppMVVMTheme {
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 
     fun arePermissionGranted(): Boolean {
-        return CAMERA_PERMISSION.all { permission ->
+        return CAMERA_PERMISSIONS.all { permission ->
             ContextCompat.checkSelfPermission(
                 applicationContext,
                 permission,
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
     }
 
     companion object {
-        val CAMERA_PERMISSION = arrayOf(
+        val CAMERA_PERMISSIONS = arrayOf(
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.RECORD_AUDIO,
         )

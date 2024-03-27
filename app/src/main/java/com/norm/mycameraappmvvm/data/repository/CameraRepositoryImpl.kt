@@ -146,7 +146,7 @@ class CameraRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             val resolver: ContentResolver = application.contentResolver
 
-            val videoCollection = MediaStore.Images.Media.getContentUri(
+            val videoCollection = MediaStore.Video.Media.getContentUri(
                 MediaStore.VOLUME_EXTERNAL_PRIMARY,
             )
 
